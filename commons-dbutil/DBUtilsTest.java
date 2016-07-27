@@ -348,6 +348,9 @@ public class DBUtilsTest {
         if (o instanceof java.sql.Timestamp) {
             return new Date(((java.sql.Timestamp) o).getTime());
         }
+        if (o instanceof Date) {
+            return (Date) o;
+        }
         return null;
     }
 

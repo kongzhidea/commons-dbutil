@@ -1,0 +1,71 @@
+package com.kk.dbaccess.op;
+
+import com.kk.dbaccess.op.mapper.ColumnMapRowMapper;
+import com.kk.dbaccess.op.mapper.SingleColumnRowMapper;
+
+import javax.sql.DataSource;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+
+public class OpList<T> extends AbstractOp {
+    private List<T> result = new ArrayList<T>();
+
+    private Class<T> clz;
+
+    public OpList() {
+    }
+
+    public OpList(DataSource dataSource, String sql) {
+        this.dataSource = dataSource;
+        this.sql = sql;
+    }
+
+    public OpList(DataSource dataSource, String sql, Object... params) {
+        this.dataSource = dataSource;
+        this.sql = sql;
+        this.params = params;
+    }
+
+    public OpList(Class<T> clz) {
+        this.clz = clz;
+    }
+
+    public OpList(Class<T> clz, DataSource dataSource, String sql) {
+        this.clz = clz;
+        this.dataSource = dataSource;
+        this.sql = sql;
+    }
+
+    public OpList(Class<T> clz, DataSource dataSource, String sql, Object... params) {
+        this.clz = clz;
+        this.dataSource = dataSource;
+        this.sql = sql;
+        this.params = params;
+    }
+
+    public Class<T> getClz() {
+        return clz;
+    }
+
+    public void setClz(Class<T> clz) {
+        this.clz = clz;
+    }
+
+    public List<T> getResult() {
+        return result;
+    }
+
+    public void add(T t) {
+        this.result.add(t);
+    }
+
+    @Override
+    public T parse(ResultSet rs) throws SQLException {
+        SingleColumnRowMapper<T> rowMapper = new SingleColumnRowMapper<T>(clz);
+        return rowMapper.mapRow(rs);
+    }
+}
