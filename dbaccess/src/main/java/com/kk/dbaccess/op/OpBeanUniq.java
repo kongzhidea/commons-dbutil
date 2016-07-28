@@ -40,6 +40,7 @@ public class OpBeanUniq<T> extends AbstractOp {
         result = ob;
     }
 
+    // 返回bean
     // 重写此方法
     public T parse(ResultSet rs) throws SQLException {
         TemplateRowMapper<T> rowMapper = new TemplateRowMapper<T>(clz);

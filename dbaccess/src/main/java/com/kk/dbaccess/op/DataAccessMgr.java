@@ -159,6 +159,30 @@ public class DataAccessMgr {
         }
     }
 
+    //最好指定clz，否则返回值一定要和数据库中的column值类型相对应， 作用与queryInt,queryLong等作用一致。
+    // 返回int，string，date等类型， 不支持bean
+    public <T> T queryObject(final OpUniq<T> op) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection conn = null;
+        T result;
+        try {
+            conn = op.getConnection();
+            ps = conn.prepareStatement(op.getSql());
+            op.setParam(ps);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                op.add(op.parse(rs));
+            }
+            if (rs.next()) {
+                logger.error("Non Unique Result Error: wrong sql syntax or database not consistence!");
+            }
+            return (T) op.getResult();
+        } finally {
+            closeRSC(rs, ps, conn);
+        }
+    }
+
     public int queryInt(final OpUniq op) throws SQLException {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -376,7 +400,7 @@ public class DataAccessMgr {
         }
     }
 
-    // List<Integer>等
+    // List<Integer>等，最好指定clz，否则返回值一定要和数据库中的column值类型相对应
     public <T> List<T> queryPrimitiveList(final OpList<T> op) throws SQLException {
         PreparedStatement ps = null;
         ResultSet rs = null;

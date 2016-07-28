@@ -42,6 +42,7 @@ public class OpBeanList<T> extends AbstractOp {
         this.result.add(ob);
     }
 
+    // 返回list<bean>
     // 重写此方法
     public T parse(ResultSet rs) throws SQLException {
         TemplateRowMapper<T> rowMapper = new TemplateRowMapper<T>(clz);

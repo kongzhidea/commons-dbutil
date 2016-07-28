@@ -21,4 +21,5 @@ public class OpUpdate extends AbstractOp {
         this.sql = sql;
         this.params = params;
     }
+    // 不用覆写 parse方法，access中一般使用update的时候，只关注更新成功的数量。
 }

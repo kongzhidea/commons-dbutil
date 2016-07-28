@@ -63,6 +63,10 @@ public class OpList<T> extends AbstractOp {
         this.result.add(t);
     }
 
+    //返回 list<map>可使用OpMap
+    // 返回list<bean>可使用obBeanList
+
+    // 返回list<string>,list<int>等方式时候直接使用即可。 最好指定clz，否则返回值一定要和数据库中的column值类型相对应
     @Override
     public T parse(ResultSet rs) throws SQLException {
         SingleColumnRowMapper<T> rowMapper = new SingleColumnRowMapper<T>(clz);
