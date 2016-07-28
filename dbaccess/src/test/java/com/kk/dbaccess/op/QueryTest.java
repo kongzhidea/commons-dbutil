@@ -23,6 +23,9 @@ public class QueryTest extends BaseTest {
         String o2 = dataAccessMgr.queryObject(new OpUniq<String>(dataSource,
                 sql, "kzh"));
         logger.info(o2);
+        int o3 = dataAccessMgr.queryInteger(new OpUniq(dataSource,
+                sql, "kzh"));
+        logger.info(o3);
 
         logger.info(dataAccessMgr.queryLong(new OpUniq(dataSource,
                 sql, "kzh")));

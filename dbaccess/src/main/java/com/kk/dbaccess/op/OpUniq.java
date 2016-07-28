@@ -43,6 +43,14 @@ public class OpUniq<T> extends AbstractOp {
         this.params = params;
     }
 
+    public Class<T> getClz() {
+        return clz;
+    }
+
+    public void setClz(Class<T> clz) {
+        this.clz = clz;
+    }
+
     public final Object getResult() {
         return result;
     }
@@ -55,7 +63,7 @@ public class OpUniq<T> extends AbstractOp {
     // 返回bean则直接使用OpBeanUniq
 
     // 如果是返回int,string等类型，则不用覆写 parse方法，只需要调用 queryInt等方法即可，内部对rs已经做了处理
-    
+
     // 如果是返回int,string等类型，可以使用queryObject，设置泛型即可，最好指定clz，否则返回值一定要和数据库中的column值类型相对应
     @Override
     public T parse(ResultSet rs) throws SQLException {

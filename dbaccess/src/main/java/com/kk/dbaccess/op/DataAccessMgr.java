@@ -183,6 +183,12 @@ public class DataAccessMgr {
         }
     }
 
+    // 对queryObject() 返回int的封装
+    public Integer queryInteger(final OpUniq op) throws SQLException {
+        op.setClz(Integer.class);
+        return (Integer) queryObject(op);
+    }
+
     public int queryInt(final OpUniq op) throws SQLException {
         PreparedStatement ps = null;
         ResultSet rs = null;
