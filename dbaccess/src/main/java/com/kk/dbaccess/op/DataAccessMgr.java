@@ -286,27 +286,8 @@ public class DataAccessMgr {
     }
 
     public BigDecimal queryBigDecimal(final OpUniq op) throws SQLException {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Connection conn = null;
-        BigDecimal result = null;
-        try {
-            conn = op.getConnection();
-            ps = conn.prepareStatement(op.getSql());
-            op.setParam(ps);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                Object o = JdbcUtils.getResultSetValue(rs, 1, Double.class);
-                result = NumberUtil.parseBigDecimal(o);
-            } else
-                return null;
-            if (rs.next()) {
-                logger.error("Non Unique Result Error: wrong sql syntax or database not consistence!");
-            }
-            return result;
-        } finally {
-            closeRSC(rs, ps, conn);
-        }
+        op.setClz(BigDecimal.class);
+        return (BigDecimal) queryObject(op);
     }
 
     // 需要重写 OpUniq.parse方法

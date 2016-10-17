@@ -3,6 +3,7 @@ package com.kk.dbaccess.op;
 import com.kk.dbaccess.model.User;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -27,13 +28,13 @@ public class QueryTest extends BaseTest {
                 sql, "kzh"));
         logger.info(o3);
 
-        logger.info(dataAccessMgr.queryLong(new OpUniq(dataSource,
+        logger.info("long=" + dataAccessMgr.queryLong(new OpUniq(dataSource,
                 sql, "kzh")));
 
-        logger.info(dataAccessMgr.queryDouble(new OpUniq(dataSource,
+        logger.info("double=" + dataAccessMgr.queryDouble(new OpUniq(dataSource,
                 sql, "kzh")));
 
-        logger.info(dataAccessMgr.queryBigDecimal(new OpUniq(dataSource,
+        logger.info("decimal=" + dataAccessMgr.queryBigDecimal(new OpUniq(dataSource,
                 sql, "kzh")));
 
         logger.info(dataAccessMgr.queryDate(new OpUniq(dataSource,
@@ -93,5 +94,16 @@ public class QueryTest extends BaseTest {
             }
         });
         logger.info(list6);
+    }
+
+    @Test
+    public void testPrime(){
+        logger.info(Integer.class.isPrimitive()); // false
+        logger.info(Double.class.isPrimitive());
+        logger.info(Float.class.isPrimitive());
+        logger.info(Long.class.isPrimitive());
+        logger.info(BigDecimal.class.isPrimitive());
+
+        logger.info(int.class.isPrimitive()); // true
     }
 }
