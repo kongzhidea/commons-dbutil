@@ -262,6 +262,10 @@ public class DataAccessMgr {
     }
 
     public Date queryDate(final OpUniq op) throws SQLException {
+        op.setClz(Date.class);
+        return (Date) queryObject(op);
+    }
+    public Date queryDate2(final OpUniq op) throws SQLException {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection conn = null;
