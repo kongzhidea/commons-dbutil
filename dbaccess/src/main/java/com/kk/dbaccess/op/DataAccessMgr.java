@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * datasource管理器，通过它可以实现db访问，进行db操作<br>
  *
- * @author lifs
+ * @author zhihui.kong
  */
 public class DataAccessMgr {
     private static DataAccessMgr instance = new DataAccessMgr();
