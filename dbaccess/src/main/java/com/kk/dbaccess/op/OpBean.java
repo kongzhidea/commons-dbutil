@@ -13,21 +13,21 @@ import java.util.List;
  *
  * @param <T>
  */
-public class OpBeanList<T> extends AbstractOp {
+public class OpBean<T> extends AbstractOp {
     private Class<T> clz;
     private List<T> result = new ArrayList<T>();
 
-    public OpBeanList(Class<T> clz) {
+    public OpBean(Class<T> clz) {
         this.clz = clz;
     }
 
-    public OpBeanList(Class<T> clz, DataSource dataSource, String sql) {
+    public OpBean(Class<T> clz, DataSource dataSource, String sql) {
         this.clz = clz;
         this.dataSource = dataSource;
         this.sql = sql;
     }
 
-    public OpBeanList(Class<T> clz, DataSource dataSource, String sql, Object... params) {
+    public OpBean(Class<T> clz, DataSource dataSource, String sql, Object... params) {
         this.clz = clz;
         this.dataSource = dataSource;
         this.sql = sql;

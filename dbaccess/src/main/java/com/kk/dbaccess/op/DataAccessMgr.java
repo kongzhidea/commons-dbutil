@@ -18,8 +18,6 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * datasource管理器，通过它可以实现db访问，进行db操作<br>
- *
- * @author zhihui.kong
  */
 public class DataAccessMgr {
     private static DataAccessMgr instance = new DataAccessMgr();
@@ -189,105 +187,106 @@ public class DataAccessMgr {
         return (Integer) queryObject(op);
     }
 
-    public int queryInt(final OpUniq op) throws SQLException {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Connection conn = null;
-        int result = 0;
-        try {
-            conn = op.getConnection();
-            ps = conn.prepareStatement(op.getSql());
-            op.setParam(ps);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                Object o = op.parse(rs, Integer.class);
-                result = NumberUtil.parseInt(o);
-            } else
-                return 0;
-            if (rs.next()) {
-                logger.error("Non Unique Result Error: wrong sql syntax or database not consistence!");
-            }
-            return result;
-        } finally {
-            closeRSC(rs, ps, conn);
-        }
-    }
-
-    public long queryLong(final OpUniq op) throws SQLException {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Connection conn = null;
-        long result = 0;
-        try {
-            conn = op.getConnection();
-            ps = conn.prepareStatement(op.getSql());
-            op.setParam(ps);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                Object o = op.parse(rs, Long.class);
-                result = NumberUtil.parseLong(o);
-            } else
-                return 0;
-            if (rs.next()) {
-                logger.error("Non Unique Result Error: wrong sql syntax or database not consistence!");
-            }
-            return result;
-        } finally {
-            closeRSC(rs, ps, conn);
-        }
-    }
-
-    public double queryDouble(final OpUniq op) throws SQLException {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Connection conn = null;
-        double result = 0;
-        try {
-            conn = op.getConnection();
-            ps = conn.prepareStatement(op.getSql());
-            op.setParam(ps);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                Object o = op.parse(rs, Double.class);
-                result = NumberUtil.parseDouble(o);
-            } else
-                return 0;
-            if (rs.next()) {
-                logger.error("Non Unique Result Error: wrong sql syntax or database not consistence!");
-            }
-            return result;
-        } finally {
-            closeRSC(rs, ps, conn);
-        }
-    }
+//    public int queryInt(final OpUniq op) throws SQLException {
+//        PreparedStatement ps = null;
+//        ResultSet rs = null;
+//        Connection conn = null;
+//        int result = 0;
+//        try {
+//            conn = op.getConnection();
+//            ps = conn.prepareStatement(op.getSql());
+//            op.setParam(ps);
+//            rs = ps.executeQuery();
+//            if (rs.next()) {
+//                Object o = op.parse(rs, Integer.class);
+//                result = NumberUtil.parseInt(o);
+//            } else
+//                return 0;
+//            if (rs.next()) {
+//                logger.error("Non Unique Result Error: wrong sql syntax or database not consistence!");
+//            }
+//            return result;
+//        } finally {
+//            closeRSC(rs, ps, conn);
+//        }
+//    }
+//
+//    public long queryLong(final OpUniq op) throws SQLException {
+//        PreparedStatement ps = null;
+//        ResultSet rs = null;
+//        Connection conn = null;
+//        long result = 0;
+//        try {
+//            conn = op.getConnection();
+//            ps = conn.prepareStatement(op.getSql());
+//            op.setParam(ps);
+//            rs = ps.executeQuery();
+//            if (rs.next()) {
+//                Object o = op.parse(rs, Long.class);
+//                result = NumberUtil.parseLong(o);
+//            } else
+//                return 0;
+//            if (rs.next()) {
+//                logger.error("Non Unique Result Error: wrong sql syntax or database not consistence!");
+//            }
+//            return result;
+//        } finally {
+//            closeRSC(rs, ps, conn);
+//        }
+//    }
+//
+//    public double queryDouble(final OpUniq op) throws SQLException {
+//        PreparedStatement ps = null;
+//        ResultSet rs = null;
+//        Connection conn = null;
+//        double result = 0;
+//        try {
+//            conn = op.getConnection();
+//            ps = conn.prepareStatement(op.getSql());
+//            op.setParam(ps);
+//            rs = ps.executeQuery();
+//            if (rs.next()) {
+//                Object o = op.parse(rs, Double.class);
+//                result = NumberUtil.parseDouble(o);
+//            } else
+//                return 0;
+//            if (rs.next()) {
+//                logger.error("Non Unique Result Error: wrong sql syntax or database not consistence!");
+//            }
+//            return result;
+//        } finally {
+//            closeRSC(rs, ps, conn);
+//        }
+//    }
 
     public Date queryDate(final OpUniq op) throws SQLException {
         op.setClz(Date.class);
         return (Date) queryObject(op);
     }
-    public Date queryDate2(final OpUniq op) throws SQLException {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Connection conn = null;
-        Date result = null;
-        try {
-            conn = op.getConnection();
-            ps = conn.prepareStatement(op.getSql());
-            op.setParam(ps);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                Object o = op.parse(rs, Date.class);
-                result = NumberUtil.parseDate(o);
-            } else
-                return null;
-            if (rs.next()) {
-                logger.error("Non Unique Result Error: wrong sql syntax or database not consistence!");
-            }
-            return result;
-        } finally {
-            closeRSC(rs, ps, conn);
-        }
-    }
+
+//    public Date queryDate2(final OpUniq op) throws SQLException {
+//        PreparedStatement ps = null;
+//        ResultSet rs = null;
+//        Connection conn = null;
+//        Date result = null;
+//        try {
+//            conn = op.getConnection();
+//            ps = conn.prepareStatement(op.getSql());
+//            op.setParam(ps);
+//            rs = ps.executeQuery();
+//            if (rs.next()) {
+//                Object o = op.parse(rs, Date.class);
+//                result = NumberUtil.parseDate(o);
+//            } else
+//                return null;
+//            if (rs.next()) {
+//                logger.error("Non Unique Result Error: wrong sql syntax or database not consistence!");
+//            }
+//            return result;
+//        } finally {
+//            closeRSC(rs, ps, conn);
+//        }
+//    }
 
     public BigDecimal queryBigDecimal(final OpUniq op) throws SQLException {
         op.setClz(BigDecimal.class);
@@ -319,7 +318,8 @@ public class DataAccessMgr {
         }
     }
 
-    public <T> T queryUniqueBean(final OpBeanUniq<T> op) throws SQLException {
+    // 返回对象
+    public <T> T queryUniqueBean(final OpBean<T> op) throws SQLException {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection conn = null;
@@ -337,7 +337,11 @@ public class DataAccessMgr {
                 logger.error("wrong sql is:" + op.getSql());
                 logger.error("wrong ps is:" + ps);
             }
-            return op.getResult();
+            if (op.getResult().size() > 0) {
+                return op.getResult().get(0);
+            } else {
+                return null;
+            }
         } finally {
             closeRSC(rs, ps, conn);
         }
@@ -411,7 +415,8 @@ public class DataAccessMgr {
         }
     }
 
-    public <T> List<T> queryBeanList(final OpBeanList<T> op) throws SQLException {
+    // 返回对象列表
+    public <T> List<T> queryBeanList(final OpBean<T> op) throws SQLException {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection conn = null;

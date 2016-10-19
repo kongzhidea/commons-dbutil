@@ -69,6 +69,9 @@ public class TemplateRowMapper<T> {
      * 　　getPropertyDescriptors()，获得属性的描述，可以采用遍历BeanInfo的方法，来查找、设置类的属性。
      */
     private void setPropertyByIntrospector(Object obj, Object prop, Object value) throws Exception {
+        if (value == null) {
+            return;
+        }
         BeanInfo beanInfo = Introspector.getBeanInfo(clz);
         // 所有的 内省方法
         PropertyDescriptor[] proDescrtptors = beanInfo.getPropertyDescriptors();

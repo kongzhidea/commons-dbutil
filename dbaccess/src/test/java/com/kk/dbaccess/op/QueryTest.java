@@ -15,29 +15,29 @@ public class QueryTest extends BaseTest {
     public void testQueryBase() throws SQLException {
         String sql = "select status from user where username=?";
 
-        logger.info(dataAccessMgr.queryInt(new OpUniq(dataSource,
-                sql, "kzh")));
+//        logger.info(dataAccessMgr.queryInt(new OpUniq(dataSource,
+//                sql, "kzh")));
 
         int o1 = dataAccessMgr.queryObject(new OpUniq<Integer>(Integer.class, dataSource,
                 sql, "kzh"));
-        logger.info(o1);
+        logger.info("int=" + o1);
         String o2 = dataAccessMgr.queryObject(new OpUniq<String>(dataSource,
                 sql, "kzh"));
-        logger.info(o2);
+        logger.info("string=" + o2);
         int o3 = dataAccessMgr.queryInteger(new OpUniq(dataSource,
                 sql, "kzh"));
-        logger.info(o3);
+        logger.info("auto=" + o3);
 
-        logger.info("long=" + dataAccessMgr.queryLong(new OpUniq(dataSource,
+        logger.info("long=" + dataAccessMgr.queryObject(new OpUniq<Long>(dataSource,
                 sql, "kzh")));
 
-        logger.info("double=" + dataAccessMgr.queryDouble(new OpUniq(dataSource,
+        logger.info("double=" + dataAccessMgr.queryObject(new OpUniq<Double>(dataSource,
                 sql, "kzh")));
 
         logger.info("decimal=" + dataAccessMgr.queryBigDecimal(new OpUniq(dataSource,
                 sql, "kzh")));
 
-        logger.info(dataAccessMgr.queryDate(new OpUniq(dataSource,
+        logger.info("username=" + dataAccessMgr.queryDate(new OpUniq(dataSource,
                 "select ctime from user where username=?", "kzh")).toLocaleString());
 
         User user = (User) dataAccessMgr.queryUnique(new OpUniq(dataSource,
@@ -54,37 +54,37 @@ public class QueryTest extends BaseTest {
                 return u;
             }
         });
-        logger.info(user);
+        logger.info("op.uniq.parse.user=" + user);
 
-        user = dataAccessMgr.queryUniqueBean(new OpBeanUniq<User>(User.class, dataSource,
+        user = dataAccessMgr.queryUniqueBean(new OpBean<User>(User.class, dataSource,
                 "select * from user where username=?", "kzh"));
-        logger.info(user);
+        logger.info("op.bean.user=" + user);
 
-        logger.info(dataAccessMgr.queryMapList(new OpMap(dataSource,
+        logger.info("op.map.list=" + dataAccessMgr.queryMapList(new OpMap(dataSource,
                 "select * from user where realname like ?", "%孔%")));
 
-        logger.info(dataAccessMgr.queryMap(new OpMap(dataSource,
+        logger.info("op.map=" + dataAccessMgr.queryMap(new OpMap(dataSource,
                 "select * from user where username =?", "kzh")));
 
         List<Integer> list = dataAccessMgr.queryPrimitiveList(new OpList(Integer.class, dataSource,
                 "select id from user where realname like ?", "%孔%"));
-        logger.info(list);
+        logger.info("int.list=" + list);
 
         List<String> list2 = dataAccessMgr.queryPrimitiveList(new OpList(String.class, dataSource,
                 "select username from user where realname like ?", "%孔%"));
-        logger.info(list2);
+        logger.info("string.list=" + list2);
 
         List<String> list3 = dataAccessMgr.queryPrimitiveList(new OpList(dataSource,
                 "select username from user where realname like ?", "%孔%"));
-        logger.info(list3);
+        logger.info("string.list=" + list3);
 
         List<Date> list4 = dataAccessMgr.queryPrimitiveList(new OpList(dataSource,
                 "select ctime from user where realname like ?", "%孔%"));
-        logger.info(list4);
+        logger.info("date.list" + list4);
 
-        List<User> list5 = dataAccessMgr.queryBeanList(new OpBeanList(User.class, dataSource,
+        List<User> list5 = dataAccessMgr.queryBeanList(new OpBean(User.class, dataSource,
                 "select * from user where realname like ?", "%孔%"));
-        logger.info(list5);
+        logger.info("bean.list=" + list5);
 
         List<String> list6 = dataAccessMgr.queryList(new OpList(dataSource,
                 "select * from user where realname like ?", "%孔%") {
@@ -93,11 +93,11 @@ public class QueryTest extends BaseTest {
                 return rs.getString("realname");
             }
         });
-        logger.info(list6);
+        logger.info("list.parse=" + list6);
     }
 
     @Test
-    public void testPrime(){
+    public void testPrime() {
         logger.info(Integer.class.isPrimitive()); // false
         logger.info(Double.class.isPrimitive());
         logger.info(Float.class.isPrimitive());
