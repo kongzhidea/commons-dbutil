@@ -18,6 +18,9 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * datasource管理器，通过它可以实现db访问，进行db操作<br>
+ * <p>
+ * Class.forName(“com.mysql.jdbc.Driver”)
+ * 在jdk6中，其实是可以不用调用Class.forName来加载mysql驱动的，因为mysql的驱动程序jar包中已经包含了java.sql.Driver配置文件，并在文件中添加了com.mysql.jdbc.Driver.但在JDK6之前版本，还是要调用这个方法。
  */
 public class DataAccessMgr {
     private static DataAccessMgr instance = new DataAccessMgr();
